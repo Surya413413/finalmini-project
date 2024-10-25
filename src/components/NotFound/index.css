@@ -1,0 +1,21 @@
+
+
+
+.notfound-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.notFoundImg {
+  height: 200px;
+  width: 200px;
+}
+.gobackbutton {
+  background-color: rgb(92, 92, 198);
+  border-radius: 10px;
+  border-width: 0px;
+  color: white;
+  cursor: pointer;
+}

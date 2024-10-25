@@ -1,0 +1,17 @@
+.list-container-items {
+  list-style: none;
+}
+.unorder-items {
+  display: flex;
+  flex-wrap: wrap;
+}
+.unorder-labels {
+  display: flex;
+  justify-content: space-around;
+}
+.Bookshelves-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

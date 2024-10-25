@@ -1,0 +1,31 @@
+.header-container {
+  background-color: #b4c4d2;
+  background-size: cover;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+}
+.header-logo {
+  margin: 10px;
+  margin-left: 20px;
+}
+.logoutButton {
+  background-color: rgb(109, 109, 198);
+  color: white;
+  border-radius: 10px;
+  border-width: 0px;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+.unorder-container {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.list{
+  padding: 10px;
+}

@@ -1,0 +1,24 @@
+.unorderList-container {
+}
+.img {
+  height: 100px;
+  width: 200px;
+}
+.title {
+  font-size: 20px;
+}
+.paragraph {
+  font-size: 15px;
+}
+.list-container {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
