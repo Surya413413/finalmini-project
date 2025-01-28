@@ -143,7 +143,7 @@ class Bookshelves extends Component {
           src="https://res.cloudinary.com/dkxxgpzd8/image/upload/v1647250727/Screenshot_30_uavmge.png"
           alt="no books"
         />
-        <p>Your search for {searchInput} did not find any matches.</p>
+        <p>Your search for {searchInput} did not find any matchess.</p>
       </div>
     )
   }
@@ -192,7 +192,11 @@ class Bookshelves extends Component {
               }
               return (
                 <li key={each.label} className="list-container-items">
-                  <button type="button" onClick={onclickActive}>
+                  <button
+                    type="button"
+                    onClick={onclickActive}
+                    className="shelf-buttons"
+                  >
                     {each.label}
                   </button>
                 </li>
@@ -204,20 +208,30 @@ class Bookshelves extends Component {
             <div>
               <h1>{activeLabel} books</h1>
             </div>
-            <div>
+            <div style={{position: 'relative', width: '100%'}}>
               <input
                 type="search"
-                placeholder="search"
+                placeholder="Search"
                 onChange={this.onChnageSearch}
                 value={searchInput}
+                style={{
+                  padding: '10px 40px 10px 10px',
+                  width: '100%',
+                  borderRadius: '8px',
+                  border: '1px solid #ccc',
+                }}
               />
-              <button
+              <BsSearch
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  right: '10px',
+                  transform: 'translateY(-50%)',
+                  color: '#aaa',
+                  cursor: 'pointer',
+                }}
                 onClick={this.onSearchBooks}
-                type="button"
-                testid="searchButton"
-              >
-                <BsSearch />
-              </button>
+              />
             </div>
           </div>
           {this.finalRender()}

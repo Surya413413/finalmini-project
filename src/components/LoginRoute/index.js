@@ -1,121 +1,127 @@
 import {Component} from 'react'
-
 import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
 
 import './index.css'
 
 class LoginRoute extends Component {
-  state = {username: '', password: '', error: '', showErrorMsg: false}
+  state = {
+    username: '',
+    password: '',
+    showSubmitError: false,
+    errorMsg: '',
+  }
 
-  changeInput = event => {
+  onChangeUsername = event => {
     this.setState({username: event.target.value})
   }
 
-  changePassword = event => {
+  onChangePassword = event => {
     this.setState({password: event.target.value})
   }
 
-  onSuccessData = jwtToken => {
+  onSubmitSuccess = jwtToken => {
     const {history} = this.props
-    Cookies.set('jwt_token', jwtToken, {expires: 30})
+
+    Cookies.set('jwt_token', jwtToken, {
+      expires: 30,
+    })
     history.replace('/')
   }
 
-  errorMsg = error => {
-    this.setState({showErrorMsg: true, error})
+  onSubmitFailure = errorMsg => {
+    this.setState({showSubmitError: true, errorMsg})
   }
 
-  onSubmitForm = async event => {
+  submitForm = async event => {
     event.preventDefault()
     const {username, password} = this.state
     const userDetails = {username, password}
     const url = 'https://apis.ccbp.in/login'
-    const option = {
+    const options = {
       method: 'POST',
       body: JSON.stringify(userDetails),
     }
-    const response = await fetch(url, option)
+    const response = await fetch(url, options)
     const data = await response.json()
-    console.log(data)
-    if (response.ok) {
-      this.onSuccessData(data.jwt_token)
+    if (response.ok === true) {
+      this.onSubmitSuccess(data.jwt_token)
     } else {
-      this.errorMsg(data.error_msg)
+      this.onSubmitFailure(data.error_msg)
     }
   }
 
-  renderUsername = () => {
-    const {username} = this.state
-    return (
-      <div>
-        <label htmlFor="user">Username</label>
-        <br />
-        <input
-          type="text"
-          placeholder="username"
-          value={username}
-          id="user"
-          className="userinput"
-          onChange={this.changeInput}
-        />
-      </div>
-    )
-  }
+  renderPasswordField = () => {
+    const {password} = this.state
 
-  renderPassword = () => {
-    const {password, showErrorMsg, error} = this.state
     return (
-      <div className="">
-        <label htmlFor="pass">Password</label>
-        <br />
+      <>
+        <label className="input-label" htmlFor="password">
+          PASSWORD
+        </label>
         <input
           type="password"
-          placeholder="password"
+          id="password"
+          className="password-input-field"
           value={password}
-          id="pass"
-          className="userinput"
-          onChange={this.changePassword}
+          onChange={this.onChangePassword}
+          placeholder="Password"
         />
-        {showErrorMsg && <p>*{error}</p>}
-      </div>
+      </>
     )
   }
 
-  renderlogobookhub = () => (
-    <div className="logo-container">
-      <img
-        src="https://res.cloudinary.com/dwsbjx12w/image/upload/v1694596689/Group_7730_uuioli.png"
-        alt="login website logo"
-        className="logoimg"
-      />
-      <h1 className="bookhublogo">BookHub</h1>
-    </div>
-  )
+  renderUsernameField = () => {
+    const {username} = this.state
+
+    return (
+      <>
+        <label className="input-label" htmlFor="username">
+          USERNAME
+        </label>
+        <input
+          type="text"
+          id="username"
+          className="username-input-field"
+          value={username}
+          onChange={this.onChangeUsername}
+          placeholder="Username"
+        />
+      </>
+    )
+  }
 
   render() {
+    const {showSubmitError, errorMsg} = this.state
     const jwtToken = Cookies.get('jwt_token')
+
     if (jwtToken !== undefined) {
       return <Redirect to="/" />
     }
+
     return (
-      <div className="login-container">
+      <div className="login-form-container">
         <img
-          src="https://s3-alpha-sig.figma.com/img/3056/c7bb/e7efb0d3d71dcb5062f1e077527d7f5d?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=bhxCCrTlWriYgZ3~lfR0ds8UWcfi1hq52sFlB7jwnIJMYUgLNz2l27S72blI07h51p2zf4u19s09fDWY8gSTfjYo0Z02xWQJo-oi5797FYgOyO3NVSRQEgIaT5XVxrtt1AByGT1oW6eATc62KbQrRu1iL4qkapqdbfrb-bizcBCLcmVw2lG5YLDzxtXvvxFRMTOzQ9D6c9duiHyaxgEuT-3mXtdvdd~cf4H8QbiUlnLI1zovfHXy3ZXNSVje2QOvDFg~IW0HD1pWv6zD-qQpYKaBrUi-g7ofcO6RsFQfJUpVw-Tpj51ovgHDAWnz3i6uXdnUPh4~CM3waQu8BA2uhw__"
-          className="loginImage"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMmZpSTSw8yB2ZaXSRC2O6IdASLewmfFdtp7JxX0Nzxjsee5fSuSyxCA_mMpak4-ETvoY&usqp=CAU"
+          className="login-img"
           alt="website login"
         />
-        <form onSubmit={this.onSubmitForm} className="form-container">
-          {this.renderlogobookhub()}
-          {this.renderUsername()}
-          {this.renderPassword()}
-
-          <button type="submit" className="loginbutton">
+        <form className="form-container" onSubmit={this.submitForm}>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQGyQVxdZAqlbksjC3nUPR6UABEs7GUsbt1A&s"
+            className="login-website-logo-desktop-img"
+            alt="website logo"
+          />
+          <div className="input-container">{this.renderUsernameField()}</div>
+          <div className="input-container">{this.renderPasswordField()}</div>
+          <button type="submit" className="login-button">
             Login
           </button>
+          {showSubmitError && <p className="error-message">*{errorMsg}</p>}
         </form>
       </div>
     )
   }
 }
+
 export default LoginRoute

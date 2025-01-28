@@ -4,14 +4,36 @@
 .unorder-items {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 .unorder-labels {
   display: flex;
   justify-content: space-around;
 }
-.Bookshelves-container{
+.Bookshelves-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.serach-buttonn {
+  background-color: transparent;
+  border-width: 0px;
+}
+
+.shelf-buttons {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Roboto';
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 10px;
+  color: rgb(42, 169, 219);
+  margin-top: 20px;
+  cursor: pointer;
+  outline: none;
+  margin: 20px;
+  border: 2px solid rgb(42, 169, 219);
 }

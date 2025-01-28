@@ -1,17 +1,19 @@
 .list-container {
   list-style: none;
-  background-color: rgb(155, 155, 181);
+  background-color: rgb(255, 255, 255);
   margin: 10px;
   width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  border-color: 1px lightblue;
+  box-shadow: 0 0 10px 5px rgba(186, 181, 181, 0.5);
 }
 .piccover {
   width: 180px;
   height: 100px;
 }
-.title{
+.title {
   font-size: 20px;
 }

@@ -12,12 +12,41 @@ import HeaderRoute from '../HeaderRoute'
 import Footer from '../Footer'
 import './index.css'
 
+// const settings = {
+//   dots: false,
+//   infinite: false,
+//   autoplay: true,
+//   slidesToScroll: 1,
+//   slidesToShow: 4,
+//   responsive: [
+//     {
+//       breakpoint: 1024,
+//       settings: {
+//         slidesToShow: 3,
+//         slidesToScroll: 1,
+
+//       },
+//     },
+//     {
+//       breakpoint: 786,
+//       settings: {
+//         slidesToShow: 2,
+//         slidesToScroll: 1,
+//       },
+//     },
+//   ],
+// }
+
+// //
+
 const settings = {
-  dots: false,
-  infinite: false,
-  autoplay: true,
+  dots: true, // Show dots for better navigation
+  infinite: true, // Enable infinite scrolling
+  autoplay: true, // Auto slide
+  autoplaySpeed: 3000, // 3 seconds for autoplay
   slidesToScroll: 1,
-  slidesToShow: 4,
+  slidesToShow: 4, // Default number of slides to show
+  arrows: true, // Enable navigation arrows
   responsive: [
     {
       breakpoint: 1024,
@@ -33,9 +62,15 @@ const settings = {
         slidesToScroll: 1,
       },
     },
+    {
+      breakpoint: 480, // Additional breakpoint for smaller screens
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
   ],
 }
-
 const apiStatusConstants = {
   initial: 'INITIAL',
   success: 'SUCCESS',
@@ -95,11 +130,17 @@ class HomeRoute extends Component {
         <Slider {...settings}>
           {dataBooks.map(each => {
             return (
-              <Link to={`/books/${each.id}`} key={`book-${each.id}`}>
+              <Link
+                className="nav-link"
+                to={`/books/${each.id}`}
+                key={`book-${each.id}`}
+              >
                 <li className="list-container">
                   <img src={each.coverPic} alt={each.title} className="img" />
-                  <h1 className="title">{each.title}</h1>
-                  <p className="paragraph">{each.authorName}</p>
+                  <div className="list-inner-items">
+                    <h1 className="title">{each.title}</h1>
+                    <p className="paragraph">{each.authorName}</p>
+                  </div>
                 </li>
               </Link>
             )
@@ -149,12 +190,12 @@ class HomeRoute extends Component {
           </p>
           <h1>Top Rated Books</h1>
           <Link to="/shelf">
-            <button type="button" className="FindBooksButton">
+            <button type="button" className="findbook-button">
               Find Books
             </button>
           </Link>
         </div>
-        <div>{this.renderTopRatedBooksSwitch()}</div>
+        <div className="success-render">{this.renderTopRatedBooksSwitch()}</div>
         <Footer />
       </>
     )
